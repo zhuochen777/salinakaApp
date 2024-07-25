@@ -1,3 +1,10 @@
+# when deploy frontend on Netlify
+1. in public folder, create a _redirects file with content: /*  /index.html  200 to prevent 404 not found when page redirecting
+2. Build command: CI= npm run build (npm run build will trigger error)
+check more details in https://stackoverflow.com/questions/58065603/netlify-renders-404-on-page-refresh-using-react-and-react-router
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
