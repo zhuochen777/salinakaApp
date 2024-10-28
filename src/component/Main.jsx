@@ -23,7 +23,7 @@ export default function Main() {
   }
   return (
     <>
-      <main className="content">
+      <main className="content" style={{paddingTop: 0}}>
         <div className="home">
           <div className="banner">
             <h1>See everything with Clarity</h1>
