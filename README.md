@@ -2,6 +2,8 @@
 1. in public folder, create a _redirects file with content: /*  /index.html  200 to prevent 404 not found when page redirecting
 2. Build command: CI= npm run build (npm run build will trigger error)
 check more details in https://stackoverflow.com/questions/58065603/netlify-renders-404-on-page-refresh-using-react-and-react-router
+3. use command "npm start" to run frontend, use command "npm run dev" to run backend
+4. this repo includes frontend code only, backend code for authorization using passport with google, github, facebook is included in salinakaApp2 repo
 
 
 
