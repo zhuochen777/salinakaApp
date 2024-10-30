@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import "../css/Signin.css";
 import "../css/Nav.css";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward.js";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput from "../component/FormInput";
-import Nav from "../component/Nav";
-import {isSignedinContext} from "../App.js"
+import FormInput from "../component/FormInput.jsx";
+import Nav from "../component/Nav.jsx";
+import { isSignedinContext } from "../App.js";
 
 export default function Signin() {
   const navigate = useNavigate();
-  const {isSignedin, setIsSignedin, signupInfo, setSignupInfo} = useContext(isSignedinContext)
+  const { isSignedin, setIsSignedin, signupInfo, setSignupInfo } =
+    useContext(isSignedinContext);
 
   const [values, setValues] = useState({
     email: "",
@@ -18,7 +19,7 @@ export default function Signin() {
 
   const [emailLabel, setEmailLabel] = useState("Email");
   const [passwordLabel, setPasswordLabel] = useState("Password");
-  const [showWarning, setShowWarning] = useState(false)
+  const [showWarning, setShowWarning] = useState(false);
 
   const inputs = [
     {
@@ -39,20 +40,18 @@ export default function Signin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      handleEmailValidation() &&
-      handlePasswordValidation()
-    ) {
+    if (handleEmailValidation() && handlePasswordValidation()) {
       let localEmail = JSON.parse(localStorage.getItem("app-user"))?.email;
-      let localPassword = JSON.parse(localStorage.getItem("app-user"))?.password;
+      let localPassword = JSON.parse(
+        localStorage.getItem("app-user")
+      )?.password;
 
-      if (values.email === localEmail && values.password === localPassword){
-        setIsSignedin(true)
-        setSignupInfo(JSON.parse(localStorage.getItem("app-user")))
-        
+      if (values.email === localEmail && values.password === localPassword) {
+        setIsSignedin(true);
+        setSignupInfo(JSON.parse(localStorage.getItem("app-user")));
       } else {
-        setIsSignedin(false)
-        setShowWarning(true)
+        setIsSignedin(false);
+        setShowWarning(true);
       }
     }
   };
@@ -84,9 +83,20 @@ export default function Signin() {
       setPasswordLabel("Password is required.");
       return false;
     } else if (password) {
-        setPasswordLabel("Password");
+      setPasswordLabel("Password");
     }
     return true;
+  };
+
+  const googleHandle = () => {
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+
+  const githubHandle = () => {
+    window.open("http://localhost:5000/auth/github", "_self");
+  };
+  const facebookHandle = () => {
+    window.open("http://localhost:5000/auth/facebook", "_self");
   };
 
   useEffect(() => {
@@ -114,7 +124,7 @@ export default function Signin() {
       <div className="signin-wrapper">
         <Nav />
         <div className="content">
-        {showWarning&&<div>warning</div>}
+          {showWarning && <div>warning</div>}
           <div className="auth-content">
             <div className="auth">
               <div className="auth-main">
@@ -165,7 +175,7 @@ export default function Signin() {
                     />
                   </div>
                 </div> */}
-                  <br /> 
+                  <br />
                   <div className="auth-field auth-action">
                     <button type="submit" className="auth-button">
                       Sign In&nbsp;
@@ -178,7 +188,7 @@ export default function Signin() {
                 <h6>OR</h6>
               </div>
               <div className="auth-provider">
-                <button className="auth-provider-button provider-facebook">
+                <button className="auth-provider-button provider-facebook" onClick={() => facebookHandle()}>
                   <span className="anticon">
                     <svg
                       viewBox="64 64 896 896"
@@ -194,7 +204,10 @@ export default function Signin() {
                   </span>
                   Continue with Facebook
                 </button>
-                <button className="auth-provider-button provider-google">
+                <button
+                  className="auth-provider-button provider-google"
+                  onClick={() => googleHandle()}
+                >
                   <span className="anticon">
                     <svg
                       viewBox="64 64 896 896"
@@ -210,7 +223,10 @@ export default function Signin() {
                   </span>
                   Continue with Google
                 </button>
-                <button className="auth-provider-button provider-github">
+                <button
+                  className="auth-provider-button provider-github"
+                  onClick={() => githubHandle()}
+                >
                   <span className="anticon">
                     <svg
                       viewBox="64 64 896 896"

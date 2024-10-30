@@ -135,13 +135,17 @@
   justify-content: center;
 }
 
-.user-nav-sub {
+.user-nav-sub.active {
   width: 150px;
   background: #fff;
   position: absolute;
   top: 100%;
   right: 0;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+.user-nav-sub.inactive{
+  display: none;
 }
 
 .user-nav-sub-link:first-child {

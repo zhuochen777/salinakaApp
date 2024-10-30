@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import Nav from "../component/Nav";
+import Nav from "../component/Nav.jsx";
 import "../css/Signup.css";
 import "../css/Nav.css";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward.js";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput from "../component/FormInput";
+import FormInput from "../component/FormInput.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { isSignedinContext } from "../App.js";
@@ -64,6 +64,8 @@ export default function Signup() {
       toast.error("New user is created", toastOptions);
       setIsSignedin(false);
       setSignupInfo(values);
+      console.log(values);
+
       localStorage.setItem("app-user", JSON.stringify(values));
     }
   };
@@ -125,6 +127,14 @@ export default function Signup() {
     return true;
   };
 
+  const googleHandle = () => {
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+
+  const githubHandle = () => {
+    window.open("http://localhost:5000/auth/github", "_self");
+  };
+  
   useEffect(() => {
     handleFullnameValidation();
   }, [values.fullname]);
@@ -227,7 +237,10 @@ export default function Signup() {
                   </span>
                   Continue with Facebook
                 </button>
-                <button className="auth-provider-button provider-google">
+                <button
+                  className="auth-provider-button provider-google"
+                  onClick={() => googleHandle()}
+                >
                   <span className="anticon">
                     <svg
                       viewBox="64 64 896 896"
@@ -243,7 +256,10 @@ export default function Signup() {
                   </span>
                   Continue with Google
                 </button>
-                <button className="auth-provider-button provider-github">
+                <button
+                  className="auth-provider-button provider-github"
+                  onClick={() => githubHandle()}
+                >
                   <span className="anticon">
                     <svg
                       viewBox="64 64 896 896"

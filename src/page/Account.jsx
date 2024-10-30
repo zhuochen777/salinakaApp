@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import Nav from "../component/Nav";
 import "../css/Account.css";
+import { isSignedinContext } from "../App.js";
 
 export default function Account() {
-  const [loginUser, setLoginUser] = useState({});
   const [tabContent, setTabContent] = useState("account");
+  const { isSignedin, setIsSignedin, signupInfo, setSignupInfo } =
+  useContext(isSignedinContext);
 
   const tabContentHandle = (content) => {
     setTabContent(content);
   };
-
-  useEffect(() => {
-    // login写好后comment取消
-    // if (!localStorage.getItem("app-user")){
-    //   navigate("/login")
-    // } else {
-    setLoginUser(JSON.parse(localStorage.getItem("app-user")));
-    // }
-  }, []);
 
   return (
     <div className="account-wrapper">
@@ -60,17 +53,25 @@ export default function Account() {
                   <div className="user-profile-avatar-wrapper">
                     <img
                       className="user-profile-img"
-                      src="https://salinaka-ecommerce.web.app/images/defaultAvatar.4e9edb2a624547982816014bf128fcd5.jpg"
+                      src={
+                        signupInfo.photos
+                          ? signupInfo.photos[0].value
+                          : "https://salinaka-ecommerce.web.app/images/defaultAvatar.4e9edb2a624547982816014bf128fcd5.jpg"
+                      }
                       alt="avatar"
                     />
                   </div>
                   <button className="user-profile-edit">Edit Account</button>
                 </div>
                 <div className="user-profile-details">
-                  <h2 className="user-profile-name">{loginUser.fullname}</h2>
+                  <h2 className="user-profile-name"> {signupInfo.fullname
+                  ? signupInfo.fullname
+                  : signupInfo.displayName}</h2>
                   <span>Email</span>
                   <br />
-                  <h5>{loginUser.email}</h5>
+                  <h5>{signupInfo.email
+                  ? signupInfo.email
+                  : signupInfo.emails[0].value}</h5>
                   <span>Address</span>
                   <br />
                   <h5 className="text-italic">Address not set</h5>
@@ -79,7 +80,7 @@ export default function Account() {
                   <h5></h5>
                   <span>Date Joined</span>
                   <br />
-                  <h5>{loginUser.createdDate}</h5>
+                  <h5>{signupInfo.createdDate? signupInfo.createdDate: "5/24/2024"}</h5>
                 </div>
               </div>
             )}
